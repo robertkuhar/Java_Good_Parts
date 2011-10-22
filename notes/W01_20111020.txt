@@ -1,0 +1,94 @@
+Chapter 1:  Introduction
+
+"Java is a tool, and any craftsman who relies on a single tool is going to have a hard time with some jobs"
+/* Programming is a "craft" in his eyes.  Not a science or an engineering discipline, it is a "craft" */
+
+- Java is good for large projects with other programmers
+- Java runs the same on multiple platforms
+  "running everywhere does not mean running optimally everywhere"
+- Java is a useful tool when the code you are writing is going to be used for a long time
+  "...complexities getting a Java program started...make Java an inconvenient choice for a one-off, quick hack..."
+  "Java is best used on systems that are designed before they are built"
+- Java is a useful tool if the code you are writing needs to be reliable
+
+We will be talking about "good part of Java, for doing the things that Java is good for doing.".
+
+"But within this large and complex system, there is still the small and simple core system, if you just know where to find it.  The goal of this book is to show that small, simple system that every Java programmer who is using Java for what the language and environment are good for should know."
+
+
+Chapter 2:  The Type System
+
+Polymorphic Type System
+  - An object is an instance of many types
+
+"After working with the Java language for more than a decade, we tend to take the type system for granted, or worse yet, notice it only when it gets in the way."
+
+The Basics
+  - Every object in a Java program is an instance of a class
+  - A class can extend another class, in which case it inherits all of the data and methods of the class it extends.
+    - It also inherits the implementation of the methods which it can override.
+    /* It always struck me as interesting that "private" and "final" exist.  I guess I want open classes and don't really like the restrictions placed on me by "private" and "final" */
+
+  "Single Inheritance...simplifies the language...makes it easy to find the code that is being run when you call some method"
+    /* Hmmm.  Unfortunately Interface works in direct opposition of this */
+
+  - Interface is the other part of the Type System for Java.
+
+  "Only classess can be directly instantiated"
+    /* Oh yeah.  Than what's deal with new'ing up an instance of an interface inn-line jtgp.ch01.TypeInterfaceStuff */
+
+  "Somewhere in the ontological middle between classes and interfaces are abstract classes"
+    /* I find it intersting that he calls out abstract class as a peer to Class and Interface */
+
+P08:  "Interfaces play into the far more important role of the type system, which is to allow the compile-time checking of the arguments and return values passed to and returned from methods"
+
+/* To this day I still do not fully comprehend why return type is not part of method signature */
+  http://en.wikibooks.org/wiki/Java_Programming/Methods says "...The reason is that a method can be called without assigning its return value to a variable..."
+  /* Is it really that simple, because the caller may choose to ignore the return value.  But so what? */
+
+
+Why have Three (class, interface, abstract class)?
+  About interface
+    Objection:  Interfaces require programmers to write more code and juggle more files
+      /* Uh, that's weak. */
+    Counter-argument:  "...The interface defines an abstraction that a class implementing that interface makes concrete.  Different classes may make the interface abstraction concrete in different ways, but they still have the abstraction that is captured by the interface in common.  That Java has a way of expressing what these different implementations have in common is a strength of the language, not a weakness."
+   
+  He calls out "IDEs to the rescue", but I hate that the languages are become so complex that you NEED to use IDEs to work with them.
+
+/* I love the 2nd to the last paragraph on P10... */
+"...the notion of an interface...the objects passed into a method or returned from the method be of the declared type.  But those objects don’t need to be exactly of that type; they are required only to be of at least that type...This is interesting because any method called on the object passed in will be dispatched to the code for the subclass, not the super class, which means new things can happen inside of old code."
+
+P11:  "When properly designed, an interface defines a semantic unit, that is, a set of operations that give meaning to each other.  As such, the interface should be thought of as the basic unit of meaning in a Java program or a system of such programs."
+  /* I always struck me as odd that Interface has no concept of data...its all about operations or methods */
+
+P12:  /* Last paragraph is good. */  "A far more accurate way to explain the semantics of the interface is to give the meanings of the methods in terms of each other..."
+
+P13:  "If you can't describe the meaning of your interface without referring to methods of some other interface, then you have two in terfaces that are dependent on each other, and that dependency should be reflected in some way."
+
+"The side effect of explaining the semantics of a method in terms of the effect on other methods within the interface is that it gives an immediate way to write some quick tests for any class that attempts to implement that interface."
+  /* Hmmm.  Can you describe these tests in such a way in the comments of your interface that they could be executed from there directly?  Now that would be something, what, Masters Degree Thesis? */
+
+P16:  "...it is important to declare arguments and return values using interfaces rather than classes"
+
+"...guideline for good use of the Java type system.  Interfaces are used to define sets of interrelated operations that, taken together, form a unit of meaning in an application...Classes, on the other hand, allow us to define a set of related data, and to associate that data with the code that is used to manipulate the data"
+
+Overarching rules for "good design"
+  - Methods will be declared in an Interface, along with the other methods that, taken together, form a semantic unit
+  - Extensions of an Interface will declare methods that can refine the meaning of the original Interface
+  - Classes will define a set of data items that can be used to store information for the particular implementation of the class.
+  - Classes will specify a set of Interface(s) that declare the methods used to manipulate the state
+  - A Class will contain the implementation of its Interface(s)
+  - A Class may contain "helper methods" outside of the Interface(s)
+
+P17:  /* I am having a difficult time accepting... */ "Is there ever a time when you want to declare the type of an argument or return value to be a class rather than an interface?"
+
+"If your system is going to last, you are better off ensuring that all methods take arguments and return values declared with interfaces"
+
+P18:  The Cowboy.draw issue is raised
+  "Java interfaces do not create a separate namespace...no way to disambiguate draw()..."
+
+  "Method names like method1() or doIt() should be avoided..." /* uh, oh */
+
+P20:  "Java allows static fields in classes...This allowed a backdoor mechanism for applets to communicate with each other"
+  "fixing" this issue led to the Java ClassLoader
+
