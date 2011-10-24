@@ -1,5 +1,7 @@
 package jtgp.ch01;
 
+import jtgp.ch02.*;
+
 /**
  * An interface that defines the notion of a batter in a baseball statistics
  * package. Each at-bat will be recorded for the hitter, along with the result
@@ -36,31 +38,43 @@ public interface Batter {
      * divided by the number of at-bats.
      * 
      * @return The batting average, as a float
+     * @throws NotEnoughAtBatsException
+     *             if the number of at-bats is insufficient to establish a
+     *             meaningful average
      */
-    float getAverage();
+    float getAverage() throws NotEnoughAtBatsException;
 
     /**
      * Return the on-base percentage for this hitter, defined as (hits + walks)
      * / at-bats.
      * 
      * @return the on-base percentage
+     * @throws NotEnoughAtBatsException
+     *             if the number of at-bats is insufficient to establish a
+     *             meaningful average
      */
-    float getOBP();
+    float getOBP() throws NotEnoughAtBatsException;
 
     /**
      * Return the slugging percentage for the batter, defined as (total number
      * of bases) / at-bats.
      * 
      * @return The slugging percentage, as a float
+     * @throws NotEnoughAtBatsException
+     *             if the number of at-bats is insufficient to establish a
+     *             meaningful average
      */
-    float getSlugging();
+    float getSlugging() throws NotEnoughAtBatsException;
 
     /**
      * Return the total number of bases for the hitter.
      * 
      * @return Total bases, as an integer
+     * @throws NotEnoughAtBatsException
+     *             if the number of at-bats is insufficient to establish a
+     *             meaningful average
      */
-    int getTotalBases();
+    int getTotalBases() throws NotEnoughAtBatsException;
 
     /**
      * Return the total number of at-bats for this hitter. Note that walks and

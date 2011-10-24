@@ -92,3 +92,73 @@ P18:  The Cowboy.draw issue is raised
 P20:  "Java allows static fields in classes...This allowed a backdoor mechanism for applets to communicate with each other"
   "fixing" this issue led to the Java ClassLoader
 
+
+Chapter 3:  Exceptions
+
+"Using exceptions correctly, your code can be easier to read.  Using exceptions, your code can be more reliable.  Using exceptions, your code can be easier to maintain.  Those who object to the exception mechanism either don't understand it, don't realize what it can do, or are simply lazy twits who don’t care about writing reliable code."
+
+Anything that is an instance of Throwable can be returned from a method by using the throw statement
+  /* I never really thought of it this way...throw is another more constrained return statement */
+
+try...catch allows the calling code to indicate where processing will resume.
+  /* I never really though about the effect of this, either */
+
+Prior to Java 1.0, uncaught Exception would just crash the VM.  No problem, that is what C++ does as well.  This don't fly in the world of containers and 24x7 uptime applications.
+
+P26:  "...if Java is really a type-safe language, then all the types that are possible to return from a method should be part of that method's signature, and the compiler should make sure that the calling code handles the returned type.  Since a thrown exception can be thought of as an alternate return value, it needs to be part of the signature."
+
+P27:  "...The construction of a Throwable requires getting a lot of state from the machine, so there is a lot of additional overhead as well."
+
+/* Has anyone ever witnessed an Exception being used as a way to transit state out of a method into the caller?  */
+
+The Why
+
+P27:  "When such a bad thing happens, there is a need to react to it, either by figuring out some other way to accomplish what was trying to be done when the bad thing happened, by cleaning up and gracefully exiting, or by aborting the operation in which the bad thing happened and trying something else."
+
+"But the code that deals with the problem shouldn't be mixed in with the code that is used when bad things don't happen, or the program can rapidly become unreadable."
+
+"In addition, programmers are probably better off if they have to deal with problems as close as possible to the time and place that they occur."
+
+/* I like how he shows the C/C++ alternative of "return status values" and the nested if(!sts) that can turn into */
+
+P28:  "The idea behind the Java exception mechanism is that the error handling should be separated in the flow of the code from the mainline, non-error code, and that the way to indicate an error should be explicit rather than built into some convention on what is returned."
+
+P28:  "We don't expect the code that is throwing the exception to be able to deal with the problem (if it could, it shouldn't be throwing the exception).  But the recipient of that thrown exception should have to deal with it, or explicitly state that they expect someone farther up the call stack to deal with it by declaring that they will be throwing the exception as well."
+
+P29:  "If you add in the requirement that the programmer has to think about all the ways that things could go wrong, and then actually write code to deal with those problems...if a programmer ignores these problems, he does so consciously"
+
+P29:  "Long experience shows that in a crunch, the only way to make a programmer do the right thing is to not generate code if he does the wrong thing."
+  /* !! Isn't this the whole platform for strongly-typed */
+
+No surprises in his Test code that I can see.
+
+P33:  "A more usual catch clause would try to deal with the exceptional condition..."
+  /* Now we are at the heart of the matter, no? */
+  /* Nah...he kind-of backs off, just an example of how crappy it looks in the C/C++ world again */
+
+P34:  BEWARE the super "catch" intercepting an extended Exception.
+  /* The compiler disallows this, no?  At least it does on my test jtgp.ch02.UseAndAbuse.java */
+
+p36:  /* I like the general dismissal of the "I don't know what to do about this" on p36 */
+  "I've not seen this, because I work with adults, but I have seen far too many exception handlers of the form:
+  } catch( SomeException e) {
+    e.printStackTrace();
+    System.exit(1);
+  }
+"
+
+/* His advice seems to be, just try harder to figure out what you can do now that this bad thing has occurred. */
+
+
+The Dark Side
+
+P37:  The RuntimeException was created to deal with the special case of problems with the VM or the machine I am running on excepting the program.
+
+"...but also there is really nothing that the application program can do to deal with the kinds of situations that are meant to be signalled by RuntimeException"
+
+“Make it a subclass of RuntimeException...the problem will hardly ever happen.”  THIS IS THE DARK SIDE SEDUCING YOU.  "It is the first step down the path to unreliable systems."
+
+"...if you actually design your code to throw only subclasses of RuntimeException, then you have gone beyond simple evil.  You have now become the corrupter of others..."
+
+P38:  "But you should do everything in your power to warn users of your code that this exception might be thrown, the circumstances under which it will be thrown, and what the caller might to do avoid the exception or deal with it if it is thrown.  It isn't the perfect solution, but it is the best that is open to you."
+
