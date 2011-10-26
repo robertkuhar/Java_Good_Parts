@@ -1,4 +1,4 @@
-package jtgp.ch02;
+package jtgp.ch03;
 
 import java.io.*;
 

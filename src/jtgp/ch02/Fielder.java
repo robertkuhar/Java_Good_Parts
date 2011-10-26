@@ -1,4 +1,4 @@
-package jtgp.ch01;
+package jtgp.ch02;
 
 /**
  * An interface that defines the notion of a fielder in a baseball statistics

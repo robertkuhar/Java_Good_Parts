@@ -1,6 +1,6 @@
-package jtgp.ch01;
+package jtgp.ch02;
 
-import jtgp.ch02.*;
+import jtgp.ch03.*;
 
 /**
  * An interface that defines the notion of a batter in a baseball statistics

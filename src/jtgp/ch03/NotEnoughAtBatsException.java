@@ -1,4 +1,4 @@
-package jtgp.ch02;
+package jtgp.ch03;
 
 public class NotEnoughAtBatsException extends Exception {
     private static final long serialVersionUID = 1L;

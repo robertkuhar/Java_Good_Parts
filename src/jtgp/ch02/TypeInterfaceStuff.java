@@ -1,4 +1,4 @@
-package jtgp.ch01;
+package jtgp.ch02;
 
 public class TypeInterfaceStuff {
     static class TheClass {
