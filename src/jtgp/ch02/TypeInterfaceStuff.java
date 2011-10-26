@@ -18,13 +18,16 @@ public class TypeInterfaceStuff {
             public void methodOnTheInterface() {
                 System.out.println( "methodOnTheInterface()" );
             } };
-        /* Why can't I do this, since I can do that crazy thing with the interface...    
-        TheClass theBetterClass = new TheClass() extends TheClass {
+        TheClass theBetterClass = new TheClass() {
             public void aNewMethodOnTheClass() {
+                System.out.println( "aNewMethodOnTheClass()" );
                 
             }
+            public void methodOnTheClass() {
+                super.methodOnTheClass();
+                aNewMethodOnTheClass();
+            }
         };
-        */
     }
 
 }
