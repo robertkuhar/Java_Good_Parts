@@ -1,0 +1,69 @@
+Chapter 4:  Packages
+
+P39:  "Rightly understood, the package mechanism allows the design of the overall software system to be disentangled and made independent in a number of important ways."
+
+P39:  "If your package declarations don't reflect your design decisions, you aren't using the system correctly"
+
+The basic function of  a package is to create a namespace.
+
+P40:  "Java is a name-equivalence language and environment, which means that things with the same name are the same...once some class with a name is loaded, any class with that same name will use the loaded implementation.
+  /* Hmmm.  He relegates the role of classloaders to a footnote on P40?!?  But J2E Containers rely on this? */
+
+P40:  "...a convention was started early in the history of Java development that a package name should start with the domain name (in reverse order)"
+
+java.* and javax.* are reserved
+
+/* The recomendation of email address for personal work is interesting, but feelst too longwinded for me "com.grmail.robertkuhar" */
+
+P41:  "...the unnamed package is a form of namespace limbo, where code written by confused, obstinate, or lazy programmers..." is placed...JUST SAY NO
+
+/* I actually see a role for the unnamed package.  It has always bothered me how difficult it is to execute some java from the command line.  Packages have contributed to this difficulty.  How many ClassNotFoundExceptions the first time you tried java from the command line? */
+
+import com.sun.foo.bar.*;
+
+P41:  Fighting words:  "...This more general form of the import statement is quite popular, but should be avoided if you can." 
+  /* I could not disagree more with the author on this point...and shouldn't the whole interface based design mitigate the issue of extra dependencies? */
+"...you are also introducting extra dependencies into your code..." /* Is this true? */
+
+Packages and Access Control
+
+P43:  "Java has an additional access category connected to the package system...protected and no access spec...access from methods that are in the package but have no relationship to the defining class"  /* I AM AMAZED that is shows up in a book about "the good parts" */
+
+/* In this day and age, does anyone rely upon package protected? */
+
+P43:  "It is important to keep in mind one difference between the hierarchy formed by packages and the hierarchy formed by classes"
+  Class Hierarchy is inclusive;
+    an object is an instance of a class it is also an instance of any class above its parent in the hierarchy.
+  Package Hierarchy; NOT POLYMORPHIC
+    Fields and methods that have package protection can be accessed only by things that are in exactly the same package. 
+    /* I actually find this frustrating sometimes, but never really worried about it.  I suppose if it was incluslive, my "import .*" views may change */
+
+P45:  on "statistics" vs. "impl":  "The reason for the split is to allow clients of the basic statistics storing classes to be dependent only on the interfaces..."
+
+P45:  in defense of "no .*, no how":  "If nothing else, too long a list of imports from another package shows an interconnection between the package being imported and the package doing the importing that might indicate a design flaw."
+  /* I'll accept this, yeah, but then WTF about 2 imports to get one useful List, and another two when I need a Map, on call to keySet on that Map, another freaking import...when does it end?  I like that the IDE's (eclipse at least) provide some way to put a threshold in.  My threshold is set to zero. */
+
+/* I don't understand why he paused at all on the NotEnoughAtBatsException...its on the method signatures of his interface, no?  In my opinion, you can try to remain too abstract, which itself is a huge code smell. */
+
+
+Packages and the Filesystem
+
+P46:  "...the required interaction between the package system and the filesystem is both regrettable and a pain"
+  /* I am disturbed...I LIKE THIS PART. */
+
+P46:  "...This is where the compiler will look for the source files that are defined in that component, and this is where the classloaders will look for the object files that contain the binaries for the classes in those packages"
+  /* The compiler doesn't do what he suggests here, the compiler is happy to compile a file that isn't in the directory that its packages suggest, just ask any IntelliJ user (Eclipse is less forgiving).  I would say that he is effectively correct, but not technically correct. */
+
+cd notes
+javac PackageFilesystemWTF.java
+# creates a .class file but I've never been able to figure out how to run it
+javac -sourcepath . -d . PackageFilesystemWTF.java
+# this builds the one/two/three directory structure and puts the class there.
+
+  /* While his complaints are somewhat true, once these things all get thrown into a common container, and the container splays them out into a single direcory, the fact that a class'es Namespace defines its directory location becomes quite the enabler. */
+
+P48:  "...the integrated development environment with database never appeared..."
+  /* Again, I disagree.  IBM's VisualAge, which begat Eclipse, PUT THE SOURCE FILES IN A DATABASE...much to the chagrin of its users when the database crashed */
+
+
+Chapter 5:  Garbage Collection
