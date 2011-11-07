@@ -67,3 +67,65 @@ P48:  "...the integrated development environment with database never appeared...
 
 
 Chapter 5:  Garbage Collection
+P48:  "Now we are going to turn to a good part of Java that lets us not do something...garbage collection.  Because of this feature, you don't have to do explicit memory management within your program."
+
+P48:  "There are still some things you have to understand to use the feature correctly."
+
+P48:  "It is difficult to keep track of when and how to clean up the memory used by objects."
+
+P49:  "Studies done around the time of the introduction of Java...over half of the bugs in C and C++ programs were caused by problems with memory management"  /* I would like to know if this still holds true...what about iOS? */
+
+/* You know, I've always hated the "Java doesn't have pointers" argument.  From my perspective, except for ints, longs, and the like JAVA ONLY HAS POINTERS.  Am I alone?  Right after I figured out how to overcome the package thing when launching java from the command line, I experienced my first NullPointerException, but we don't have pointers?  Hmmm, someone is not telling the whole truth. */
+
+P51:  "All you can do with a reference (other than passing it around to others) is to access field or methods of the object to which the reference refers"
+  - You can't arithmetic with it, so that is not like a pointer
+  - This feature alone makes Java less error prone and more secure than C/C++
+
+P52:  "Garbage collection requires that the system know the difference between references to objects and other forms of data"
+  /* In Java...what are "other forms of data"? */
+
+An environment that includes garbage collection needs to allow objects to be moved to avoid fragmentation.
+
+P52:  "Generational garbage collectors depend on the observation that most objects are short-lived."
+
+Generational Garbage Collectors keep 2 Heaps
+    1.  New Objects
+    2.  Objects that have survived at least one garbage-collection sweep
+
+"Know your worst friend, the Garbage Collector"  http://java.sys-con.com/node/84695
+
+
+Memory Leaks
+  Memory leaks are still possible when references to objects are left in other long-lived objects.
+
+P53:  "Most objects are small and most programs don't run for that long" /* I beg to differ.  In the last 10 years, virtually ALL THE PROGRAMS I HAVE WORKED ON are intended to run for very long times */
+
+/* !!! I did not know of java.util.UUID !!! */
+
+P55:  "Because we now have a way to store references to an object, we also have a way to defeat the garbage collector."
+
+/* His leak is rather contrived...he should have mentioned something like static initializer hell */
+
+/* What about "soft references"? */
+
+P56:  Java does not help with the management of Files or Sockets or other limited system resources.
+
+P56:  Finalizers tempt some programmers to try to delegat the management of such resource to the garbage collector...bad idea.
+
+P56:  "Finalizers are the dual of constructors...a finalizer will be run when an object is about to be deleted by the garbage collector.
+
+P57:  /* DOCTOR, HEAL THYSELF!?!  The code won't compile and even if it did...OMG!  Swallowed exceptions?  System.out rather than System.err?  No null checks? Holy crap! Credibility-- */
+
+P58:  "...keeping the ObjectInputStream open...ties up a file handle for the lifecycle of the object"
+
+P59:  "...there is no guarantee that the finalizer will ever be called on an object...it is possible for a program to end without invoking the finalizers"
+
+He suggests that you trade finalizer for a program shutdown method.
+
+P61:  "This is the coding equivalent of wearing both a belt and suspenders, and is evidence of a level of paranoia that is common among software developers.  If such a call is made, we will also display a message, since writing state in the finalizer shows that some change isn't being recorded in the main body of the program.  This is a lurking bug that we will want to fix."
+  /* So, he hasn't heard of System.err? */
+
+Conclusions:
+  1.  Garbage Collection is good
+  2.  Don't hold on to references you don't need, you are killing the garbage collector
+  3.  Don't abuse the Garbage Collector sub-system in an attempt to manage other resources
