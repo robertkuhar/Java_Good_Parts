@@ -137,3 +137,49 @@ Further Reading:
   "Know your worst friend, the Garbage Collector" by Romain Guy http://java.sys-con.com/node/84695 
   "Plugging memory leaks with weak references" by Brian Goetz http://www.ibm.com/developerworks/java/library/j-jtp11225/index.html
   "Plugging memory leaks with soft references" by Brian Goetz http://www.ibm.com/developerworks/java/library/j-jtp01246/index.html 
+
+
+Chapter 6:  The Java Virtual Machine.
+
+P64:  "Most of the virtual machines that people are paying attention to virtualize at a very low level...software layer between raw hardware and the operating system...the Java Virtual Machine...at a much higher level"
+
+/* The JVM abstracts both the hardware and the operating system */
+
+P64:  "JVM on one operating system should look to the programmer just like a JVM on a completely different operating system.  If it doesn't, it isn't because your code isn't using the operating system correctly; it is because of a flaw in the JVM"...on that environment.
+
+P64:  "The Java virtual machine was always meant to be a development and runtime platform for new code, written in the Java language" /* I AM CERTAIN, that this is changing;  witness Groovy, Clojure, Scala, Jython, JRuby, the list goes on...Erlang? */
+
+P64:  "The mechanism for this splits the work of generating object code between the compiler and the JVM."
+       javac translates sourcecode to bytecode which it puts in a .class file
+       JVM runs the bytecode from the .class file
+       JVM is responsible for loading the .class files that it references, into the virtual machine, which will then interpret and run the bytecodes.
+       Early JVMs acted as an interpreter for the bytecodes, translating those codes into whatever underlying instructions were required by the basic hardware and operating system.
+
+       This is not new, Pascal had p-code
+
+       Just-In-Time compilers showed up in the JVMs to convert the bytecodes into native code
+
+P65:  "JIT compilation also has the advantage of knowing the actual usage of the code and the environment of the current program execution, so rather than having to optimize for all possible runs (like a standard, single-time compiler and optimizer), the JIT compiler can optimize for each particular run of the program.  In theory, this should enable programs that are compiled on the fly to be faster than those that are compiled in more traditional fashion; in fact, such results are beginning to be seen with the current crop of virtual machines."
+
+Security:
+
+P66:  "Since a Java program runs inside a JVM, there is an extra layer between the program and the computer. This extra layer has a lot of checks on the code, and isolates the code further from other code running on the physical machine. This lets the JVM act as a security monitor, and a lot of what the JVM does is tied to this role.:
+  - JVM verifies all the code run in the JVM prior to loading that code
+    "The original intention of the verifier was not to protect against attacks in code, but rather to make sure that there were fewer bugs in code."
+
+P67:  "...This is a book about the good parts of Java, and I'm not convinced that the security mechanisms should be included...getting good security often requires trading off usability."
+
+P67:  "Because the JVM enforces a security model that was originally tied to the Java language, it is not always possible to have a language hosted on the JVM that is exactly like the language when it is compiled to native object code...There may be some language idioms that are outlawed in the hybrid environment..."
+
+Portability:
+
+P67:  "...JVM is a good thing is that it makes the code you write portable....isolates you from the chip and the operating system...the Java binary, move it from machine to machine and operating system to operating system, and the program will run."
+
+P68:  "...Things have gotten somewhat simpler over time just because of the consolidation of the computer industry.  There used to be a lot more variation in processors and a lot more different operating systems than there are today"
+  /* I found this comment both accurate and interesting...the JVM solved a problem that was going away all by itself. */
+
+P68:  "...that instead of tearing your hair out trying to fix your code, you can file a bug with the Java organization and get the problem fixed." /* BULLSHIT...You can file a bug, and wait, and wait */
+
+
+
+
