@@ -180,6 +180,4 @@ P68:  "...Things have gotten somewhat simpler over time just because of the cons
 
 P68:  "...that instead of tearing your hair out trying to fix your code, you can file a bug with the Java organization and get the problem fixed." /* BULLSHIT...You can file a bug, and wait, and wait */
 
-
-
-
+I get the feeling this guy doesn't write servlets or anything that runs in a J2E container, like the System.properties pitch, it doesn't really work in the container world.  Dependency Injection, though, that can work.
