@@ -92,7 +92,7 @@ Generational Garbage Collectors keep 2 Heaps
     1.  New Objects
     2.  Objects that have survived at least one garbage-collection sweep
 
-"Know your worst friend, the Garbage Collector"  http://java.sys-con.com/node/84695
+"Know your worst friend, the Garbage Collector" by Romain Guy http://java.sys-con.com/node/84695 
 
 
 Memory Leaks
@@ -106,7 +106,9 @@ P55:  "Because we now have a way to store references to an object, we also have 
 
 /* His leak is rather contrived...he should have mentioned something like static initializer hell */
 
-/* What about "soft references"? */
+/* What about "weak references" and "soft references"? */
+"Plugging memory leaks with weak references" by Brian Goetz http://www.ibm.com/developerworks/java/library/j-jtp11225/index.html
+"Plugging memory leaks with soft references" by Brian Goetz http://www.ibm.com/developerworks/java/library/j-jtp01246/index.html 
 
 P56:  Java does not help with the management of Files or Sockets or other limited system resources.
 
@@ -129,3 +131,9 @@ Conclusions:
   1.  Garbage Collection is good
   2.  Don't hold on to references you don't need, you are killing the garbage collector
   3.  Don't abuse the Garbage Collector sub-system in an attempt to manage other resources
+
+Further Reading:  
+  "Java SE6 HotSpot[tm] Virtual Machine Garbage Collection Tuning" http://www.oracle.com/technetwork/java/javase/gc-tuning-6-140523.html?printOnly=1
+  "Know your worst friend, the Garbage Collector" by Romain Guy http://java.sys-con.com/node/84695 
+  "Plugging memory leaks with weak references" by Brian Goetz http://www.ibm.com/developerworks/java/library/j-jtp11225/index.html
+  "Plugging memory leaks with soft references" by Brian Goetz http://www.ibm.com/developerworks/java/library/j-jtp01246/index.html 
