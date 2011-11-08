@@ -4,7 +4,7 @@ P39:  "Rightly understood, the package mechanism allows the design of the overal
 
 P39:  "If your package declarations don't reflect your design decisions, you aren't using the system correctly"
 
-The basic function of  a package is to create a namespace.
+The basic function of a package is to create a namespace.
 
 P40:  "Java is a name-equivalence language and environment, which means that things with the same name are the same...once some class with a name is loaded, any class with that same name will use the loaded implementation.
   /* Hmmm.  He relegates the role of classloaders to a footnote on P40?!?  But J2E Containers rely on this? */
@@ -13,7 +13,7 @@ P40:  "...a convention was started early in the history of Java development that
 
 java.* and javax.* are reserved
 
-/* The recomendation of email address for personal work is interesting, but feelst too longwinded for me "com.grmail.robertkuhar" */
+/* The recommendation of email address for personal work is interesting, but feels too longwinded for me "com.grmail.robertkuhar" */
 
 P41:  "...the unnamed package is a form of namespace limbo, where code written by confused, obstinate, or lazy programmers..." is placed...JUST SAY NO
 
@@ -23,7 +23,7 @@ import com.sun.foo.bar.*;
 
 P41:  Fighting words:  "...This more general form of the import statement is quite popular, but should be avoided if you can." 
   /* I could not disagree more with the author on this point...and shouldn't the whole interface based design mitigate the issue of extra dependencies? */
-"...you are also introducting extra dependencies into your code..." /* Is this true? */
+"...you are also introducing extra dependencies into your code..." /* Is this true? */
 
 Packages and Access Control
 
@@ -36,7 +36,7 @@ P43:  "It is important to keep in mind one difference between the hierarchy form
     an object is an instance of a class it is also an instance of any class above its parent in the hierarchy.
   Package Hierarchy; NOT POLYMORPHIC
     Fields and methods that have package protection can be accessed only by things that are in exactly the same package. 
-    /* I actually find this frustrating sometimes, but never really worried about it.  I suppose if it was incluslive, my "import .*" views may change */
+    /* I actually find this frustrating sometimes, but never really worried about it.  I suppose if it was inclusive, my "import .*" views may change */
 
 P45:  on "statistics" vs. "impl":  "The reason for the split is to allow clients of the basic statistics storing classes to be dependent only on the interfaces..."
 
@@ -60,7 +60,7 @@ javac PackageFilesystemWTF.java
 javac -sourcepath . -d . PackageFilesystemWTF.java
 # this builds the one/two/three directory structure and puts the class there.
 
-  /* While his complaints are somewhat true, once these things all get thrown into a common container, and the container splays them out into a single direcory, the fact that a class'es Namespace defines its directory location becomes quite the enabler. */
+  /* While his complaints are somewhat true, once these things all get thrown into a common container, and the container splays them out into a single directory, the fact that a class’s Namespace defines its directory location becomes quite the enabler. */
 
 P48:  "...the integrated development environment with database never appeared..."
   /* Again, I disagree.  IBM's VisualAge, which begat Eclipse, PUT THE SOURCE FILES IN A DATABASE...much to the chagrin of its users when the database crashed */
@@ -112,7 +112,7 @@ P55:  "Because we now have a way to store references to an object, we also have 
 
 P56:  Java does not help with the management of Files or Sockets or other limited system resources.
 
-P56:  Finalizers tempt some programmers to try to delegat the management of such resource to the garbage collector...bad idea.
+P56:  Finalizers tempt some programmers to try to delegate the management of such resource to the garbage collector...bad idea.
 
 P56:  "Finalizers are the dual of constructors...a finalizer will be run when an object is about to be deleted by the garbage collector.
 
@@ -181,3 +181,4 @@ P68:  "...Things have gotten somewhat simpler over time just because of the cons
 P68:  "...that instead of tearing your hair out trying to fix your code, you can file a bug with the Java organization and get the problem fixed." /* BULLSHIT...You can file a bug, and wait, and wait */
 
 I get the feeling this guy doesn't write servlets or anything that runs in a J2E container, like the System.properties pitch, it doesn't really work in the container world.  Dependency Injection, though, that can work.
+
