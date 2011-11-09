@@ -182,3 +182,7 @@ P68:  "...that instead of tearing your hair out trying to fix your code, you can
 
 I get the feeling this guy doesn't write servlets or anything that runs in a J2E container, like the System.properties pitch, it doesn't really work in the container world.  Dependency Injection, though, that can work.
 
+Dan will do CH07:  JavaDocs
+Eric will do CH08:  Collections
+
+
