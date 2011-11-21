@@ -1,0 +1,60 @@
+Chapter 7:  Javadoc
+
+P77:  "Java allows real documentation to be embedded with the code being documented, so that the two can be produced at the same time and, even more importantly, changed at the same time.  The mechanism for this is Javadoc, which is definitely a good part of Java."
+  /* It always stikes me as odd that, eclipse at least, is great at stubbing in your Javadoc for a method, but beyond that make no effort to keep it current as method signatures are changed over time */
+
+In the beginning...
+  /* ... */ delimited the comments.  These became known as "block comment", but only after //, the single line comment, was born.
+  /** */ Java added a 3rd kind of comment, the documentation comment
+
+Javadoc is a tool that scans the sourcecode in search of Documentation comments (and public method signatures).
+
+Documentation comments can only appear...
+  1.  Prior to the declaration of a class or an interface
+  2.  Prior to the declaration of a method or a field in a class
+
+Comment Files
+  Every package can contain a special file that can be used to document the overall structure of that package
+
+       package.html:  Prior to 5.0
+  package-info.java:  Java 5.0 and beyond
+
+You can embed HTML into your documentation comments and it will be preserved.
+
+Special Tags
+@author name
+@version version
+@since since-text
+@see reference
+@param name description
+@return description
+@exception classname description OR @throws classname description
+@deprecated description
+{@inheritDoc}  /* since 1.4 */
+{@link reference}
+{@value}  /* since 1.4 */
+
+{@inheritDoc} is useful in that it pulls the documentation from the inheritance chain.
+
+P79:  "Good javadoc supplies API documentation that can be shipped (and viewed) separately from the implementation of the API, encouraging users of the code to rely only on the documented features and not on implementation details."
+
+P80:  "a good rule of system development is to write the javadoc for the interfaces first, and then use that documentation as a form of specification for any classes that implement the interface."
+  /* Is anyone doing this or have you heard of this being done? */
+
+/* As an example of my above rant, note the incorrect Javadoc comment for ch05.Player getId method.  At some point it returned an int, but then that became UUID.  The code changed, the comment didn't.  Is this the downside of decoupling the Javadoc and Javac processes?  Even on P80, the problems with change-over-time persist.  getTeam DOES NOT return a String as the Javadocs say, but return an actual Team! */
+
+/* The grammar of his enum Javadoc leaves much to be desired */ "...will return an object implement the {@link Fielder} interface except.." what?
+
+/* {@inheritDoc} sounds like a great idea.  I'm pretty sure Eclipse does this by default.  I liked the demonstration on P86 with {@inheritDoc} before a clarifying paragraph (although he stumbled upon my pet peeve; <p> with no </p>. */
+
+Package Documentation
+
+P88:  "One thing to notice about the package-info.java file is that links need to use the fully qualified class or interface name.  This is because of an interesting catch-22 of such files.  Document comments are only processed before a declaration.  The only declaration that can appear in a package-info.java file is the declaration of the package.  So the document comments need to appear before the declaration of the package so that the tool generating the documentation will read it.  But prior to the package declaration, there is no reference package for the links.  So you need to put in the fully qualified name of the class or interface.  This is something of a hassle, but is worth it to get some general description of the interaction of those package pieces into the documentation."
+  /* This I did not know */
+
+P89:  "Finding a set of guides that work for your organization is a good exercise, but doing so will almost certainly mean that some members of the staff will want to control things that seem way too minor to worry about.  A sense of proportion is needed in such discussions, but rarely found.  My experience has been that discussions of documentation conventions soon become similar to discussions about coding conventions or which editor is superior.  They don’t end."
+  /* This guy has been to the rodeo */
+
+
+
+
