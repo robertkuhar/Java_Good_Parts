@@ -56,5 +56,35 @@ P89:  "Finding a set of guides that work for your organization is a good exercis
   /* This guy has been to the rodeo */
 
 
+Chapter 8:  Collections
+
+P91:  "Much of the basic curriculum of a computer science education was (and, in many places, still is) given over to teaching how to build such data structures."
+
+P93:  "If we add a Player object to a list that is already full, the List will automatically resize"
+  /* Not exactly, List doesn't guarantee that, although ArrayList probably does.  P93 doesn't match up well against the JavaDoc of List http://download.oracle.com/javase/6/docs/api/java/util/List.html */
+
+P93:  "Collections are here to free us from writing code"
+
+P94:  "Set does not guarantee the order of the elements stored in it"
+  /* TreeSet does (guarantee the order)! */
+
+/* I think the legacy users may hate this guy...List<Player> getPlayerList() doesn't evolve into Set<Player> getPlayerList(), at some point THERE IS NO getPlayerList() it has been replaced, without documentation, deprecation, or anything, with Set<Player>getRoster().  I upgraded...my build breaks.  Thanks. */
+
+P96:  /* It is interesting that he bothers to return a copy of his internal Set in PlayerImpl.  He justifies this on P97. */
+
+/* !! Parameterized Types are in a Good Parts book?!? */
+
+P98:  The catch (ClassCastException ex) is pretty unnecessary, no?  Concurrent modifications of our Set...but wouldn't that be realized as CME?
+
+P98:  "With both the belt and suspenders, we can be sure..." :)
+
+P99:  "The idea behind generics is reasonably simple...we can have variables in some declarations that vary over types rather than instances of types.  We can then instantiate particular versions of these generically declared items by binding the type variable to some particular value."
+
+/* By P103 he has pretty much said that it is all done with compiler magic */
+
+P104:  "...I'm not sure i would include them in the good parts of the language, they certainly get my vote for inclusion into the useful parts of the language"
+
+P105:  "Metaphor and poetry are, on some accounts, attempts to say the unsayable."
 
 
+somewhere Page 114
