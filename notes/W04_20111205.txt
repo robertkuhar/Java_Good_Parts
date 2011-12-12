@@ -1,0 +1,47 @@
+Chapter 9:  Remote Method Invocation and Object Serialization
+
+IPC - Inter-porcess communication
+    - allow programs on the same machine to interact
+
+RPC - Remote Procedure Call
+    - Wraps much of the mechanism used to communicate between programs in a facade that makes the communication look like a procedure or method call.
+
+RMI over IIOP is Java wrapper over CORBA RPC.
+
+P122:  RMI and Java Serialization are "often maligned, misunderstood, and abused.  But once understood, they are difinitely in the good parts of Java".
+
+P123:  "Marker" interface is considered a good part by the author?  I am not so sure.
+
+/* I'm not so sure of this interface at all...his implementation has just leaked in a very large way.  Even if client's aren't remote, they now have to deal with RemoteException. */
+
+P126:  I don't understand his coding conventions at all.  "Program with interfaces", yet LinkedList a = new LinkedList() and so on.  How about getPosition vs getBatting and sometimes I'll use contains sometimes I check not null.  Ugh.
+
+P129:  "The only really interesting method (in StatRecorderImpl.java) is the private method exportRecorder()..."
+
+"Java SecurityManaagers are a dark art...but they do protect the VM on which they are running in a number of ways.  Because RMI makes use of the ability of the JVM to dynamically load code, and because you don't want to load code without the protection of a security manager, programs utilizing RMI should always be run with a security manager. "
+  /* I don't understand this entirely...where is the remote code load here? By P133 he tries to explain it. */
+
+The most interesting method is the exportRecorder()
+  1.  Get a SecurityManager
+  2.  Get the RMI Registry handle
+      myStub = (StatRecorder) UnicastRemoteObject.exportObject( this, 5550 );
+      /* This line tells the RMI infrastructure which object we want to export and on what port...a proxy object is returned from the call */
+      The idea is that we can ship a Serialized form of the proxy object over the network, where it can be deserialized and act as a stand-in for our StatRecorder instance.
+  3.  registry.rebind( "Recorder", myStub ); makes us findable.
+
+!! Client side is interesting in StatReporterImpl.  Why is it an "Impl", it doesn't implement the interface.  It has its own methods and, kind-of, calls through and adapts them.
+
+/* On P133 he calls out that the client and the server have to agree on the naming of things:  hostname and port of the server and name of the service.  Not unlike the REST URI stuff, no? */
+
+
+Object Serialization
+
+P134, footnote defines "pickling" and "unpickling" with some interesting commentary.
+
+Serialization is easy for primitive types, but a challenge for Objects and the graphs they tend to produce.
+
+P134
+
+
+
+

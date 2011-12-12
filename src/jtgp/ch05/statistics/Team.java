@@ -2,6 +2,8 @@ package jtgp.ch05.statistics;
 
 import java.util.*;
 
+import jtgp.ch08.Player;
+
 /**
  * The <code>Team</code> interface, which defines the notion of a team for our
  * statistics package. A team is, at first incarnation, simply a collection of
@@ -38,5 +40,13 @@ public interface Team {
      *            - <code>Player</code> to remove
      */
     void removePlayer( Player toRemove );
+
+    /**
+     * Retrieve <code>Player</code> from the team.
+     * 
+     * @param id
+     *            - <code>UUID</code> of <code>Player</code> to retriev
+     */
+    Player getPlayer( UUID id );
 
 }
