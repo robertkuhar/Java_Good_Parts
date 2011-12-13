@@ -40,8 +40,42 @@ P134, footnote defines "pickling" and "unpickling" with some interesting comment
 
 Serialization is easy for primitive types, but a challenge for Objects and the graphs they tend to produce.
 
-P134
+Serialization is the conversion of a graph of objects, rooted in some particular object, into such a stream.
 
+Deserialization is the conversion of a stream into a copy of an equivalent graph of objects.
 
+"But making sure that the PlayerImpl object can be made available to the StatRecorderImpl is somewhat more interesting.  RMI could simply require that all of the types used by clients and servers be present (and the same) on all machines running those clients and servers...Instead, RMI uses object serialization to ensure that what you send is what you get."
+
+P137:  "The serialVersionUID is remnant of an earlier attempt to deal with the versioning problem with Java classes.  It is still useful in detecting version differences in classes, but the story of the serialVersionUID is a cautionary talke that may be of use to tell"
+  /* sounds ominous */
+
+  "...since we aren't storing the code along with the object state in the serialized form, there is always a chance that when we reconstruct the object, the class that defined the data or the methods that minpulated the data have changed..."
+
+  "The original ide was to introduce the serialVersionUID as a...fingerprint...of structural equivalence.  In effect, the system wanted to make sure that all of the methods and all the fieds, including signatures, that defined the two classes were the same"
+
+  "This approach was well intentioned, clever, and ultimately doomed.
+
+  Inner classes screwed it, as well as other things that caused the compilers to produce different names for the same source code.
+
+  So the Java Runtime is out for generating a reliable serialVersionUID...you are on the hook to generate it yourself, AND KEEP IT CURRENT.
+  Add a field to the class, increment the serialVersionUID
+  
+P138:  "If you separately serialize two objects, each of which references a common third object, when you deserialize the original two objects, you will get two copies of the object formerly referenced by both.".
+  /* Do the XML serialization techniques overcome this?  Can't you do object referenes in XML? */
+
+/* readResolve() and writeReplace() aren't part of the good parts of Java, hmmm.  Than what's the point of taking over serialVersionUID? */
+
+P139:  "What makes object serialization somewhat unique and what makes RMI very different from previous RPC systems is that the serial stream includes the information needed to identify and, when properly configured, find the code that goes along with the serialized object."
+  /* THIS IS THE GOLD, if I can understand it. */
+
+P141:  "Like Network Objects, RMI was designed to be an RPC system that assumed both ends of the RPC call were written in Java...like Network Objects, RMI was designed to allow passing objects by value as well as by reference from one address space to another..."
+       "Unlike Network Objects, however, Java compiles to bytecodes that can be run on any JVM, and the JVM allows classes to be dynamically loaded....the serialized stream that is sent from one address space to the other is annotated with the actual class of the object and a location on the network from which the bytecodes for the implementation of that class can be found...if the class is not on the local machine, the code for the class will be obtained (if possible) from the source indicated in the serialization stream, and it will be loaded into the receiving JVM and used to reconstruct the object".
+  /* !!!!!!!!!! WOW...This I did not know !!!!!!!!!! */
+        "...there is a System Property that determines how the serialized stream produced will be annotated to tell a receiving process where to look for classes needed for deserializing the stream."
+
+  java.rmi.server.codebase
+    - Should be set to a URL that is accessible from the client and that is the root of a hierarchy of classes (or a .JAR file) and that contains the code that may need to be downloaded
+
+Wow.  That chapter finished with a bang.
 
 
